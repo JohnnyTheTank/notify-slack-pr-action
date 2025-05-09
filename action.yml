@@ -1,0 +1,52 @@
+name: 'Notify Slack'
+description: 'Send a notification to Slack about a GitHub Pull Request'
+author: 'JohnnyTheTank'
+
+inputs:
+  webhook-url:
+    description: 'Slack webhook URL'
+    required: true
+  pr-url:
+    description: 'URL of the created Pull Request'
+    required: true
+  source-repo:
+    description: 'Source repository name (format: org/repo)'
+    required: true
+  target-repo:
+    description: 'Target repository name (format: org/repo)'
+    required: true
+  message-template:
+    description: 'Custom message template to use (optional)'
+    required: false
+
+runs:
+  using: 'composite'
+  steps:
+    - name: Send notification to Slack
+      shell: bash
+      env:
+        WEBHOOK_URL: ${{ inputs.webhook-url }}
+        PR_URL: ${{ inputs.pr-url }}
+        SOURCE_REPO: ${{ inputs.source-repo }}
+        TARGET_REPO: ${{ inputs.target-repo }}
+        MESSAGE_TEMPLATE: ${{ inputs.message-template }}
+      run: |
+        if [ -z "$PR_URL" ]; then
+          echo "PR_URL is empty, not sending notification to Slack"
+          exit 0
+        fi
+
+        # Replace template variables in message
+        MESSAGE=$(echo "$MESSAGE_TEMPLATE" | \
+          sed "s|{source-repo}|$SOURCE_REPO|g" | \
+          sed "s|{target-repo}|$TARGET_REPO|g" | \
+          sed "s|{pr-url}|$PR_URL|g")
+
+        # Send to Slack
+        curl -X POST "$WEBHOOK_URL" \
+          -H "Content-Type: application/json" \
+          -d "{\"text\": \"$MESSAGE\"}"
+
+branding:
+  icon: 'message-square'
+  color: 'purple' 
