@@ -12,17 +12,19 @@ A simple GitHub Action to send pull request notifications to Slack.
     pr-url: ${{ steps.create_pr.outputs.pr_url }}
     source-repo: 'my-org/my-tool'
     target-repo: 'my-org/my-repo'
+    description: 'This PR includes critical bug fixes.'
 ```
 
 ## Inputs
 
-| Input              | Description                               | Required | Default |
-| ------------------ | ----------------------------------------- | -------- | ------- |
-| `webhook-url`      | Slack webhook URL                         | Yes      | -       |
-| `pr-url`           | URL of the created Pull Request           | Yes      | -       |
-| `source-repo`      | Source repository name (format: org/repo) | Yes      | -       |
-| `target-repo`      | Target repository name (format: org/repo) | Yes      | -       |
-| `message-template` | Custom message template                   | No       | -       |
+| Input              | Description                                 | Required | Default                                                                                                                                                           |
+| ------------------ | ------------------------------------------- | -------- | ----------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `webhook-url`      | Slack webhook URL                           | Yes      | -                                                                                                                                                                 |
+| `pr-url`           | URL of the created Pull Request             | Yes      | -                                                                                                                                                                 |
+| `source-repo`      | Source repository name (format: org/repo)   | Yes      | -                                                                                                                                                                 |
+| `target-repo`      | Target repository name (format: org/repo)   | Yes      | -                                                                                                                                                                 |
+| `message-template` | Custom message template                     | No       | ':github_green: <https://github.com/{source-repo}\|{source-repo}> created a <{pr-url}\|*new Pull Request*> for <https://github.com/{target-repo}\|{target-repo}>' |
+| `description`      | Additional description to append to message | No       | -                                                                                                                                                                 |
 
 ## Template Variables
 
@@ -48,5 +50,6 @@ Example message template:
     source-repo: 'my-org/my-tool'
     target-repo: 'my-org/my-repo'
     message-template: ':rocket: New PR from {source-repo} to {target-repo}: <{pr-url}|Click here>'
+    description: 'This includes changes to the deployment process.'
 ```
 

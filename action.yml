@@ -1,5 +1,5 @@
-name: 'Notify Slack about Pull Request'
-description: 'Send a notification to Slack about Pull Request'
+name: 'Notify Slack'
+description: 'Send a notification to Slack about a GitHub Pull Request'
 author: 'JohnnyTheTank'
 
 inputs:
@@ -18,6 +18,10 @@ inputs:
   message-template:
     description: 'Custom message template to use (optional)'
     required: false
+    default: ':github_green: <https://github.com/{source-repo}|{source-repo}> created a <{pr-url}|*new Pull Request*> for <https://github.com/{target-repo}|{target-repo}>'
+  description:
+    description: 'Additional description to append to the message (optional)'
+    required: false
 
 runs:
   using: 'composite'
@@ -30,6 +34,7 @@ runs:
         SOURCE_REPO: ${{ inputs.source-repo }}
         TARGET_REPO: ${{ inputs.target-repo }}
         MESSAGE_TEMPLATE: ${{ inputs.message-template }}
+        DESCRIPTION: ${{ inputs.description }}
       run: |
         if [ -z "$PR_URL" ]; then
           echo "PR_URL is empty, not sending notification to Slack"
@@ -41,6 +46,11 @@ runs:
           sed "s|{source-repo}|$SOURCE_REPO|g" | \
           sed "s|{target-repo}|$TARGET_REPO|g" | \
           sed "s|{pr-url}|$PR_URL|g")
+        
+        # Append description if provided
+        if [ -n "$DESCRIPTION" ]; then
+          MESSAGE="$MESSAGE\n> $DESCRIPTION"
+        fi
 
         # Send to Slack
         curl -X POST "$WEBHOOK_URL" \
