@@ -17,14 +17,14 @@ A simple GitHub Action to send pull request notifications to Slack.
 
 ## Inputs
 
-| Input              | Description                                 | Required | Default                                                                                                                                                           |
-| ------------------ | ------------------------------------------- | -------- | ----------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| `webhook-url`      | Slack webhook URL                           | Yes      | -                                                                                                                                                                 |
-| `pr-url`           | URL of the created Pull Request             | Yes      | -                                                                                                                                                                 |
-| `source-repo`      | Source repository name (format: org/repo)   | Yes      | -                                                                                                                                                                 |
-| `target-repo`      | Target repository name (format: org/repo)   | Yes      | -                                                                                                                                                                 |
-| `message-template` | Custom message template                     | No       | ':github_green: <https://github.com/{source-repo}\|{source-repo}> created a <{pr-url}\|*new Pull Request*> for <https://github.com/{target-repo}\|{target-repo}>' |
-| `description`      | Additional description to append to message | No       | -                                                                                                                                                                 |
+| Input              | Description                                 | Required | Default                                                                                                                                                             |
+| ------------------ | ------------------------------------------- | -------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `webhook-url`      | Slack webhook URL                           | Yes      | -                                                                                                                                                                   |
+| `pr-url`           | URL of the created Pull Request             | Yes      | -                                                                                                                                                                   |
+| `source-repo`      | Source repository name (format: org/repo)   | Yes      | -                                                                                                                                                                   |
+| `target-repo`      | Target repository name (format: org/repo)   | Yes      | -                                                                                                                                                                   |
+| `message-template` | Custom message template                     | No       | `':github_green: <https://github.com/{source-repo}\|{source-repo}> created a <{pr-url}\|*new Pull Request*> for <https://github.com/{target-repo}\|{target-repo}>'` |
+| `description`      | Additional description to append to message | No       | -                                                                                                                                                                   |
 
 ## Template Variables
 
