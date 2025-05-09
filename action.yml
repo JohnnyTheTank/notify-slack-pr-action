@@ -1,5 +1,5 @@
-name: 'Notify Slack about a GitHub Pull Request'
-description: 'Send a notification to Slack about a GitHub Pull Request'
+name: 'Notify Slack about Pull Request'
+description: 'Send a notification to Slack about Pull Request'
 author: 'JohnnyTheTank'
 
 inputs:
