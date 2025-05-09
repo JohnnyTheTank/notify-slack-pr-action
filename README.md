@@ -5,8 +5,8 @@ A simple GitHub Action to send pull request notifications to Slack.
 ## Usage
 
 ```yaml
-- name: Send notification to Slack
-  uses: JohnnyTheTank/notify_slack@v1.0.0
+- name: Send notification to Slack about created Pull Request
+  uses: JohnnyTheTank/notify_slack_pr@v1.0.0
   with:
     webhook-url: ${{ secrets.SLACK_WEBHOOK_URL }}
     pr-url: ${{ steps.create_pr.outputs.pr_url }}
@@ -40,8 +40,8 @@ Example message template:
 ## Example with Custom Message
 
 ```yaml
-- name: Send notification to Slack
-  uses: JohnnyTheTank/notify_slack@v1.0.0
+- name: Send notification to Slack about created Pull Request
+  uses: JohnnyTheTank/notify_slack_pr@v1.0.0
   with:
     webhook-url: ${{ secrets.SLACK_WEBHOOK_URL }}
     pr-url: ${{ steps.create_pr.outputs.pr_url }}
