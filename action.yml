@@ -18,7 +18,7 @@ inputs:
   message-template:
     description: 'Custom message template to use (optional)'
     required: false
-    default: ':github_green: <https://github.com/{source-repo}|{source-repo}> created a <{pr-url}|*new Pull Request*> for <https://github.com/{target-repo}|{target-repo}>'
+    default: ':github_green: <https://github.com/{source-repo}|`{source-repo}`> created a <{pr-url}|*new Pull Request*> for <https://github.com/{target-repo}|`{target-repo}`>'
   description:
     description: 'Additional description to append to the message (optional)'
     required: false
